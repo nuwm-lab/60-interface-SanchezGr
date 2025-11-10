@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace LabWork6
 {
-    // ---------- Інтерфейси ----------
+    //Інтерфейси
     public interface IPrintable
     {
         string RoleName { get; }
@@ -15,7 +15,7 @@ namespace LabWork6
         void Experience(out int years, out int months, out int days);
     }
 
-    // ---------- Хелпер для вводу ----------
+    //11
     static class ConsoleHelper
     {
         public static string ReadLetters(string prompt)
@@ -58,10 +58,10 @@ namespace LabWork6
         }
     }
 
-    // ---------- Абстрактний базовий клас ----------
+    // Абстрактний базовий клас 
     abstract class Person : IPrintable
     {
-        // Інкапсуляція через властивості (protected set — доступний у нащадках)
+        // Інкапсуляція через властивості 
         public string LastName  { get; protected set; } = "";
         public string FirstName { get; protected set; } = "";
         public string University{ get; protected set; } = "";
@@ -74,11 +74,11 @@ namespace LabWork6
             University = un;
         }
 
-        ~Person() { } // деструктор для вимог ЛР6 (демо)
+        ~Person() { } // деструктор для вимог
 
         public abstract string RoleName { get; }
 
-        // Віртуальні методи (демонстрація динамічного поліморфізму)
+        // Віртуальні методи
         public virtual void InputMain()
         {
             LastName   = ConsoleHelper.ReadLetters("Прізвище практиканта: ");
@@ -94,7 +94,7 @@ namespace LabWork6
         }
     }
 
-    // ---------- Похідний клас Практикант ----------
+    //  Похідний клас Практикант 
     class Praktykant : Person
     {
         public Praktykant() : base() { }
@@ -102,10 +102,10 @@ namespace LabWork6
         ~Praktykant() { }
 
         public override string RoleName => "Практикант";
-        // override не потрібні — базова реалізація повністю підходить
+        
     }
 
-    // ---------- Похідний клас Працівник фірми ----------
+    //  Похідний клас Працівник фірми
     class PracivnykFirmy : Person, IWorker
     {
         public string School   { get; private set; } = "";
@@ -158,7 +158,7 @@ namespace LabWork6
         }
     }
 
-    // ---------- Точка входу ----------
+  
     class Program
     {
         static void Main()
@@ -168,7 +168,7 @@ namespace LabWork6
             Console.Write("Оберіть режим (1 — працівник, 2 — практикант): ");
             string choice = (Console.ReadLine() ?? "").Trim();
 
-            // Показ: одночасно базовий тип + інтерфейс
+            //  одночасно базовий тип + інтерфейс
             Person person;
             if (choice == "1") person = new PracivnykFirmy();
             else if (choice == "2") person = new Praktykant();
@@ -179,11 +179,10 @@ namespace LabWork6
             person.InputMain();  // виклик віртуального методу через базовий тип (динамічний поліморфізм)
             printable.Show();    // виклик через інтерфейс
 
-            // демонстрація інтерфейсу IWorker (лише якщо це працівник)
             if (person is IWorker w)
             {
                 w.Experience(out int y, out int m, out int d);
-                // (дані вже показані у Show, тут просто приклад виклику через інтерфейс)
+               
             }
         }
     }
