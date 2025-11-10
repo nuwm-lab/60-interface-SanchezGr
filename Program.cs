@@ -1,8 +1,4 @@
-
 ﻿using System;
-
-using System;
-
 using System.Globalization;
 
 namespace LabWork6
@@ -165,7 +161,7 @@ namespace LabWork6
             else { Console.WriteLine("Невірний вибір."); return; }
 
             p.InputMain();
-            p.Show();
+            p.Show(); //11
         }
     }
 }
